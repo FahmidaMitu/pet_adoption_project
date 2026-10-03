@@ -44,5 +44,5 @@ Follow these steps to run the project locally on your machine:
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/YOUR_GITHUB_USERNAME/pet-adoption-platform.git](https://github.com/YOUR_GITHUB_USERNAME/pet-adoption-platform.git)
+git clone [https://github.com/FahmidaMitu/pet_adoption_project.git](https://github.com/FahmidaMitu/pet_adoption_project.git)
 cd pet-adoption-platform
