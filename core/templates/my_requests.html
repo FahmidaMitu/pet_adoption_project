@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>My Adoption Requests</h2>
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Pet</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for req in requests %}
+            <tr>
+                <td>{{ req.pet.name }}</td>
+                <td>{{ req.created_at|date:"d M Y" }}</td>
+                <td>
+                    {% if req.status == 'Approved' %}
+                        <span class="badge bg-success">Approved</span>
+                    {% elif req.status == 'Rejected' %}
+                        <span class="badge bg-danger">Rejected</span>
+                    {% else %}
+                        <span class="badge bg-warning text-dark">Pending</span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="3">No adoption applications found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

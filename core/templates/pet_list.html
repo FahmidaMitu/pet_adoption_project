@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Available Pets for Adoption</h2>
+
+<!-- Search & Filter Form -->
+<form method="GET" class="row g-3 mb-4">
+    <div class="col-md-3">
+        <input type="text" name="search" class="form-control" placeholder="Search pet name..." value="{{ request.GET.search }}">
+    </div>
+    <div class="col-md-3">
+        <input type="text" name="animal_type" class="form-control" placeholder="Animal Type (e.g. Dog)" value="{{ request.GET.animal_type }}">
+    </div>
+    <div class="col-md-3">
+        <select name="gender" class="form-select">
+            <option value="">Select Gender</option>
+            <option value="Male" {% if request.GET.gender == 'Male' %}selected{% endif %}>Male</option>
+            <option value="Female" {% if request.GET.gender == 'Female' %}selected{% endif %}>Female</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <button type="submit" class="btn btn-primary w-100">Filter</button>
+    </div>
+</form>
+
+<div class="row">
+    {% for pet in pets %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                {% if pet.image %}
+                    <img src="{{ pet.image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">🐶 {{ pet.name }}</h5>
+                    <p class="card-text">
+                        <strong>Type:</strong> {{ pet.animal_type }}<br>
+                        <strong>Breed:</strong> {{ pet.breed }}<br>
+                        <strong>Age:</strong> {{ pet.age }} years<br>
+                        <strong>Gender:</strong> {{ pet.gender }}<br>
+                        <strong>Location:</strong> {{ pet.location }}<br>
+                        <strong>Status:</strong> <span class="badge bg-info">{{ pet.status }}</span>
+                    </p>
+                    <a href="{% url 'pet_detail' pet.pk %}" class="btn btn-outline-primary btn-sm">View Details</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No pets found matching your criteria.</p>
+    {% endfor %}
+</div>
+{% endblock %}

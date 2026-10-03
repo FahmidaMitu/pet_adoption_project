@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <div class="row g-0">
+        <div class="col-md-5">
+            {% if pet.image %}
+                <img src="{{ pet.image.url }}" class="img-fluid rounded-start" alt="{{ pet.name }}">
+            {% endif %}
+        </div>
+        <div class="col-md-7">
+            <div class="card-body">
+                <h3>🐶 {{ pet.name }}</h3>
+                <hr>
+                <p><strong>Type:</strong> {{ pet.animal_type }}</p>
+                <p><strong>Breed:</strong> {{ pet.breed }}</p>
+                <p><strong>Age:</strong> {{ pet.age }} years</p>
+                <p><strong>Gender:</strong> {{ pet.gender }}</p>
+                <p><strong>Location:</strong> {{ pet.location }}</p>
+                <p><strong>About:</strong> {{ pet.description }}</p>
+                <p><strong>Status:</strong> {{ pet.status }}</p>
+
+                {% if pet.status == 'Available' %}
+                    <a href="{% url 'apply_adoption' pet.pk %}" class="btn btn-success">Apply for Adoption</a>
+                {% else %}
+                    <div class="alert alert-danger">❌ This pet has already been adopted.</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
